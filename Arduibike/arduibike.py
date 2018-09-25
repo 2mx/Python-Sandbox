@@ -122,6 +122,12 @@ _do_mesures = 0
 # @see : http://effbot.org/tkinterbook/grid.htm
 # Note la methode .grid() fait référence à la grille contenu dans le widget Parent
 # donc ici la fenêtre principlale "win"
+#
+#  ---------------------------
+# | col=0 row=0 | col=1 row=0 |
+#  ---------------------------
+# | col=0 row=1 columnspan=2  |
+#  ---------------------------
 
 # Fenetre principale
 win = tk.Tk()
