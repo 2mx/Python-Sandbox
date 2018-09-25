@@ -51,14 +51,17 @@ class DigitalMeter :
 # Events Handlers
 #======================
 
+# Quitte l'application et ferme la fenetre
 def _quit():
     win.destroy()
 
+# Copie/Affiche les mesures courante dans le digitmeter mémo
 def _memo_mesures():
     digit_tension_memo.set( digit_tension.get() )
     digit_intensity_memo.set( digit_intensity.get() )
     digit_power_memo.set(digit_power.get())
 
+# Remet tout les digitmeters à zero
 def _reset_mesures():
     digit_tension_memo.set(0)
     digit_intensity_memo.set(0)
@@ -85,6 +88,7 @@ def _acquisition_mesures():
     mesure['power'] = mesure['tension'] * mesure['intensity']
     return mesure
 
+# Mise à jour des messures toutes les secondes
 def _update_mesures():
     global _do_mesures
     mesure = _acquisition_mesures()
@@ -95,7 +99,12 @@ def _update_mesures():
         win.after(1000,_update_mesures)
 
 
+# Variable (flag) pour savoir si on doit faire l'acquisition des mesures
+# 0 = off
+# 1 = on  _update_mesures() est appelé toutes les secondes
 _do_mesures = 0
+
+
 
 #======================
 # Interface
@@ -104,24 +113,24 @@ _do_mesures = 0
 # Fenetre principale
 win = tk.Tk()
 
-# Ajouter un titre
-win.title("Vélo Monitoring")
+# Ajout du titre
+win.title("Arduino Vélo Monitoring")
 
-# Créer widgets DigitalMeter pour le monitoring en continue
+# Créeation des widgets DigitalMeter pour le monitoring en continue
 frame_mesure_monitor = tk.LabelFrame(win, text = 'Mesures en continu')
 digit_tension = DigitalMeter(frame_mesure_monitor, title="Tension \n (en volt)", num_value = 0)
 digit_intensity = DigitalMeter(frame_mesure_monitor, title="Intensité \n (en Ampère)", num_value = 0)
-digit_power = DigitalMeter(frame_mesure_monitor, title="Puissance \n (en J)", num_value = 0)
+digit_power = DigitalMeter(frame_mesure_monitor, title="Puissance \n (en W)", num_value = 0)
 frame_mesure_monitor.grid(column=0, row=0, sticky = 'W', padx=8, pady=8)
 
-# Créer widgets DigitalMeter pour la mémorisation des mesures
+# Créeation des widgets DigitalMeter pour la mémorisation des mesures
 frame_mesure_memo = tk.LabelFrame(win, text = 'Mesures mémorisées')
 digit_tension_memo = DigitalMeter(frame_mesure_memo, title="Tension \n (en volt)")
 digit_intensity_memo = DigitalMeter(frame_mesure_memo, title="Intensité \n (en Ampère)")
-digit_power_memo = DigitalMeter(frame_mesure_memo, title="Puissance \n (en J)", num_value = 0)
+digit_power_memo = DigitalMeter(frame_mesure_memo, title="Puissance \n (en W)", num_value = 0)
 frame_mesure_memo.grid(column=1, row=0, sticky = 'W', padx=8, pady=8)
 
-# Créer les bouttons d'actions
+# Créeation des bouttons d'actions
 frame_actions = tk.LabelFrame(win, text = 'Actions')
 btn_start = tk.Button(frame_actions, text = 'START', command=_start_mesures, width=10)
 btn_start.grid(column=0, row=0, sticky = 'W', padx=8, pady=8)
