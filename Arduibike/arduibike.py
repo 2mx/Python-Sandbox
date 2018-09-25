@@ -12,7 +12,11 @@ import random
 #======================
 # Class
 #======================
+
+# Widget DigitalMeter
 class DigitalMeter :
+    
+    # Constructeur
     def __init__(self, parent_widget,**config_args):
         # config par defaut
         config = {
@@ -37,19 +41,22 @@ class DigitalMeter :
         self.set(config['num_value'])
         self.lbl_num.grid(column=1, row=0, sticky = 'W', padx=8)
 
+
+    # Set the digitmeter value
+    # Formate et affiche la valeur
     def set(self, value):
-        """Formatage et affichage de la valeur"""
         self.value = value
         value = "{0:.2f}".format(value)
         self.lbl_num.config(text=value)
 
+     # Get the digitmeter value
     def get(self):
         return self.value
 
 
-#======================
-# Events Handlers
-#======================
+#==============================
+# Events Handlers (callback)
+#==============================
 
 # Quitte l'application et ferme la fenetre
 def _quit():
@@ -110,6 +117,12 @@ _do_mesures = 0
 # Interface
 #======================
 
+# Pour positionner tout les éléments on utilise le gestionnaires de positionnement "grid" (geometry managers) 
+# @see : http://tkinter.fdex.eu/doc/gp.html
+# @see : http://effbot.org/tkinterbook/grid.htm
+# Note la methode .grid() fait référence à la grille contenu dans le widget Parent
+# donc ici la fenêtre principlale "win"
+
 # Fenetre principale
 win = tk.Tk()
 
@@ -130,7 +143,7 @@ digit_intensity_memo = DigitalMeter(frame_mesure_memo, title="Intensité \n (en 
 digit_power_memo = DigitalMeter(frame_mesure_memo, title="Puissance \n (en W)", num_value = 0)
 frame_mesure_memo.grid(column=1, row=0, sticky = 'W', padx=8, pady=8)
 
-# Créeation des bouttons d'actions
+# Créeation des bouttons d'actions et 
 frame_actions = tk.LabelFrame(win, text = 'Actions')
 btn_start = tk.Button(frame_actions, text = 'START', command=_start_mesures, width=10)
 btn_start.grid(column=0, row=0, sticky = 'W', padx=8, pady=8)
