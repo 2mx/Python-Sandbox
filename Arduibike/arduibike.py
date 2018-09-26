@@ -137,28 +137,33 @@ win.title("Arduino Vélo Monitoring")
 
 # Créeation des widgets DigitalMeter pour le monitoring en continue
 frame_mesure_monitor = tk.LabelFrame(win, text = 'Mesures en continu')
-digit_tension = DigitalMeter(frame_mesure_monitor, title="Tension \n (en volt)", num_value = 0)
-digit_intensity = DigitalMeter(frame_mesure_monitor, title="Intensité \n (en Ampère)", num_value = 0)
-digit_power = DigitalMeter(frame_mesure_monitor, title="Puissance \n (en W)", num_value = 0)
-frame_mesure_monitor.grid(column=0, row=0, sticky = 'W', padx=8, pady=8)
+digit_tension        = DigitalMeter(frame_mesure_monitor, title="Tension \n (en volt)", num_value = 0)
+digit_intensity      = DigitalMeter(frame_mesure_monitor, title="Intensité \n (en Ampère)", num_value = 0)
+digit_power          = DigitalMeter(frame_mesure_monitor, title="Puissance \n (en W)", num_value = 0)
+
 
 # Créeation des widgets DigitalMeter pour la mémorisation des mesures
-frame_mesure_memo = tk.LabelFrame(win, text = 'Mesures mémorisées')
-digit_tension_memo = DigitalMeter(frame_mesure_memo, title="Tension \n (en volt)")
+frame_mesure_memo    = tk.LabelFrame(win, text = 'Mesures mémorisées')
+digit_tension_memo   = DigitalMeter(frame_mesure_memo, title="Tension \n (en volt)")
 digit_intensity_memo = DigitalMeter(frame_mesure_memo, title="Intensité \n (en Ampère)")
-digit_power_memo = DigitalMeter(frame_mesure_memo, title="Puissance \n (en W)", num_value = 0)
-frame_mesure_memo.grid(column=1, row=0, sticky = 'W', padx=8, pady=8)
+digit_power_memo     = DigitalMeter(frame_mesure_memo, title="Puissance \n (en W)", num_value = 0)
 
-# Créeation des bouttons d'actions et 
+
+# Créeation des bouttons d'actions 
 frame_actions = tk.LabelFrame(win, text = 'Actions')
-btn_start = tk.Button(frame_actions, text = 'START', command=_start_mesures, width=10)
+btn_start     = tk.Button(frame_actions, text = 'START', command=_start_mesures, width=10)
+btn_memo      = tk.Button(frame_actions, text = 'Mémoriser', command=_memo_mesures)
+btn_reset     = tk.Button(frame_actions, text = 'Reset', command=_reset_mesures)
+btn_quit      = tk.Button(frame_actions, text = 'Quitter', command=_quit)
+# Mise en page des bouttons avec 'grid' 
 btn_start.grid(column=0, row=0, sticky = 'W', padx=8, pady=8)
-btn_memo = tk.Button(frame_actions, text = 'Mémoriser', command=_memo_mesures)
 btn_memo.grid(column=1, row=0, sticky = 'W', padx=8, pady=8)
-btn_reset = tk.Button(frame_actions, text = 'Reset', command=_reset_mesures)
 btn_reset.grid(column=2, row=0, sticky = 'W', padx=8, pady=8)
-btn_quit = tk.Button(frame_actions, text = 'Quitter', command=_quit)
 btn_quit.grid(column=3, row=0, sticky = 'W', padx=8, pady=8)
+
+# Mise en page des frames widgets DigitalMeter et bar d'actions avec 'grid'
+frame_mesure_memo.grid(column=1, row=0, sticky = 'W', padx=8, pady=8)
+frame_mesure_monitor.grid(column=0, row=0, sticky = 'W', padx=8, pady=8)
 frame_actions.grid(row=1, columnspan=2, padx=8, pady=8, sticky = 'WE')
 
 
