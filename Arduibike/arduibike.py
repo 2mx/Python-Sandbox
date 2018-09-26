@@ -35,10 +35,11 @@ class DigitalMeter :
         self.frame.pack(padx=50 , pady=10)
         # Label
         self.lbl = tk.Label(self.frame, width=10, font=("Arial",20),text=config['title'], fg = '#222')
-        self.lbl.grid(column=0, row=0, sticky = 'E')
         # Valeur
         self.lbl_num = tk.Label(self.frame, font=("Arial",40,"bold"))
         self.set(config['num_value'])
+        # Layout Grid
+        self.lbl.grid(column=0, row=0, sticky = 'E')
         self.lbl_num.grid(column=1, row=0, sticky = 'W', padx=8)
 
 
