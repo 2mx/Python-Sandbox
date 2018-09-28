@@ -7,7 +7,7 @@
 import tkinter as tk
 from tkinter import ttk
 from widgets import *
-import random
+import arduino
 
 
 
@@ -114,20 +114,16 @@ class ArduibikeApp(tk.Frame):
         if(self._do_mesures):
             self.after(1000,self._update_mesures)
 
-    # Simulation de l'acquisition avec RANDOM
-    # @TODO implémenter Arduino
-    def _acquisition_mesures(self):
-        mesure = {'tension':0, 'intensity':0, 'power':0}
-        mesure['tension'] = random.uniform(0.5, 5)
-        mesure['intensity'] = random.uniform(0.2, 2)
-        mesure['power'] = mesure['tension'] * mesure['intensity']
-        return mesure
+    
 
     # Mise à jour des messures toutes les secondes
     # Pour gerer le temps avec tkinter on utilise la méthode de widgets .after(delay, function, *args, **kwargs)
     # @see : https://pythonfaqfr.readthedocs.io/en/latest/prog_even_tkinter.html#gerer-le-temps
     def _update_mesures(self):
-        mesure = self._acquisition_mesures()
+        # Simulation de l'acquisition avec RANDOM
+        # @TODO implémenter Arduino
+        arduino_serial = arduino.SerialReadUIRandom()
+        mesure = arduino_serial.read()
         self.digit_tension.set(mesure['tension'])
         self.digit_intensity.set(mesure['intensity'])
         self.digit_power.set(mesure['power'])
