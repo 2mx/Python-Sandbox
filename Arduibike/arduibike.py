@@ -59,6 +59,8 @@ class DigitalMeter :
 # Events Handlers (callback)
 #==============================
 
+# see: https://pythonfaqfr.readthedocs.io/en/latest/prog_even_tkinter.html
+
 # Quitte l'application et ferme la fenetre
 def _quit():
     win.destroy()
@@ -97,6 +99,8 @@ def _acquisition_mesures():
     return mesure
 
 # Mise à jour des messures toutes les secondes
+# Pour gerer le temps avec tkinter on utilise la méthode de widgets .after(delay, function, *args, **kwargs)
+# @see : https://pythonfaqfr.readthedocs.io/en/latest/prog_even_tkinter.html#gerer-le-temps
 def _update_mesures():
     global _do_mesures
     mesure = _acquisition_mesures()
@@ -168,7 +172,7 @@ frame_mesure_monitor.grid(column=0, row=0, sticky = 'W', padx=8, pady=8)
 frame_actions.grid(row=1, columnspan=2, padx=8, pady=8, sticky = 'WE')
 
 
-#======================
 # Start GUI
-#======================
+# Démarre la boucle événementielle mainloop
+# @see https://pythonfaqfr.readthedocs.io/en/latest/prog_even_tkinter.html
 win.mainloop()
