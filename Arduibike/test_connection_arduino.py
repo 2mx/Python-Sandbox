@@ -3,7 +3,8 @@ import re
 import serial
 
 # Création d'une connection serie
-# Pour la gestion des exceptions voir http://apprendre-python.com/page-apprendre-exceptions-except-python-cours-debutant
+# Pour la gestion des exceptions 
+# @see: http://apprendre-python.com/page-apprendre-exceptions-except-python-cours-debutant
 try :
     conn_serial = serial.Serial(port="COM4", baudrate=9600, timeout=1, writeTimeout=1)
 except serial.serialutil.SerialException as errorException :
