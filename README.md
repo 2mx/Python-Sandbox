@@ -1,2 +1,2 @@
-# Python-Sandbox
-Échantillons de code Python
+# Python3-Sandbox
+Échantillons de code Python3
