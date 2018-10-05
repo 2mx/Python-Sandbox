@@ -12,8 +12,17 @@ except serial.serialutil.SerialException as errorException :
    sys.exit()
 
 while True:
-    # Lecture
-    data = conn_serial.readline()
+    # Lecture Arduino
+    # Wait here until there is data
+    while (conn_serial.in_waiting()==0): 
+        pass #do nothing
+        
+    # Les données envoyées par arduino sont reçut par python au format "bytes object" : b'0.0;2.9\r\n'
+    # le b indique que les données sont au format bytes object 
+    # @see: https://www.geeksforgeeks.org/byte-objects-vs-string-python/
+    # @see: https://www.pythoncentral.io/encoding-and-decoding-strings-in-python-3-x/
+    # on utilise la methode .decode() pour convertir les données en caractères
+    data = conn_serial.readline().decode('ascii')
 
     # Extraction et validation des données avec une expression régulière
     # Les données doivent être au format : 8.25;1.41 (il peut y avoir des caractères avant et/ou aprés)
